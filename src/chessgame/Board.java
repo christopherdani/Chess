@@ -33,7 +33,12 @@ public class Board {
 			}
 		}
 	}
-	
+
+	/**
+	 * Get the board instance. Create one if it does not exist.
+	 * @param game
+	 * @return An instance of the board.
+	 */
 	public static Board getBoardInstance(boolean game){
 		if (board == null){
 			Board board = new Board(game);
