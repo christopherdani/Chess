@@ -3,6 +3,9 @@ package chessgame;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A singleton class containing an instance of the board that the game will be played on.
+ */
 public class Board {
 	
 	public static List<Pawn> pawns;
