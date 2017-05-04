@@ -3,6 +3,9 @@ package chessgame;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * An interface that describes a unit in a chess game.
+ */
 public interface Unit {
 	
 	//COLOR 0 = white

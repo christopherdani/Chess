@@ -3,6 +3,9 @@ package chessgame;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that describes a pawn object and what it can do.
+ */
 public class Pawn implements Unit{
 
 	private Position pos;
