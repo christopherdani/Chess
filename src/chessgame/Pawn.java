@@ -29,9 +29,20 @@ public class Pawn implements Unit{
 
 	@Override
 	public List<Position> canMove() {
-		
+		//Implement en passant!
 		List<Position> paths = new ArrayList<Position>();
-		return null;
+		Position current = this.getPos();
+		Position move;
+		if (this.color == 0) {
+			move = new Position(current.getFile() + 1, current.getRank());
+		}
+		else {
+			move = new Position(current.getFile() - 1, current.getRank());
+		}
+		if (!Board.isOccupied(move)){
+			paths.add(move);
+		}
+		return paths;
 	}
 
 	@Override
@@ -47,13 +58,32 @@ public class Pawn implements Unit{
 
 	@Override
 	public List<Position> canKill() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Position> killPositions = new ArrayList<Position>();
+		Position current = this.getPos();
+		Position killPos1, killPos2;
+		if (this.color == 0) {
+			killPos1 = new Position(current.getFile() + 1, current.getRank() + 1);
+			killPos2 = new Position(current.getFile() + 1, current.getRank() - 1);
+		}
+		else {
+			killPos1 = new Position(current.getFile() - 1, current.getRank() + 1);
+			killPos2 = new Position(current.getFile() - 1, current.getRank() - 1);
+		}
+		// Implement en passant later!
+		if (Board.isOccupied(killPos1)){
+			killPositions.add(killPos1);
+		}
+		if (Board.isOccupied(killPos2)){
+			killPositions.add(killPos2);
+		}
+		return killPositions;
 	}
 
 	@Override
 	public boolean canKill(Position pos) {
-		// TODO Auto-generated method stub
+		if (!this.canKill().isEmpty()){
+			return true;
+		}
 		return false;
 	}
 
