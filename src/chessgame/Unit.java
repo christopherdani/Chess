@@ -23,6 +23,8 @@ public interface Unit {
 	 * @return Whether or not a unit can move to pos.
 	 */
 	public boolean canMove(Position pos);
+
+	public Position getPos();
 	
 	public List<Position> canKill();
 	

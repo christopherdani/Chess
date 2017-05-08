@@ -17,7 +17,8 @@ public class Pawn implements Unit{
 		this.color = color;
 
 	}
-	
+
+	@Override
 	public Position getPos() {
 		return pos;
 	}
