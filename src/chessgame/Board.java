@@ -9,14 +9,22 @@ import java.util.List;
 public class Board {
 	
 	public static List<Pawn> pawns;
+	public static List<King> kings;
 	private static Board board;
 	private Position[][] game;
 
 	private Board(boolean start){
 		
 		Board.pawns = new ArrayList<Pawn>();
-		if (start == true){
+		Board.kings = new ArrayList<King>();
+		if (start){
 			//Fill the board with units in its initial positions
+
+			//Create black king
+			kings.add(new King(new Position(3,7),1));
+			//Create white king
+			kings.add(new King(new Position(3,0),0));
+
 			for (int i = 0; i < 8; i++){
 				for (int j = 0; j < 8; j++){
 					//Create black pawns
@@ -29,6 +37,7 @@ public class Board {
 						Pawn pawn = new Pawn(new Position(i ,j), 0);
 						pawns.add(pawn);
 					}
+
 				}
 			}
 		}
@@ -63,19 +72,6 @@ public class Board {
 	
 	public void kill(){
 		
-	}
-	
-	public void display(){
-		for (int i = 0; i < 8; i++){
-			for (int j = 0; j < 8; j++){
-				for (Pawn pawn : pawns){
-					if (pawn.getPos().equals(new Position(i,j))){
-						System.out.println("P");
-					}
-				}
-			}
-		}
-		System.out.println();
 	}
 	
 }

@@ -17,7 +17,16 @@ public class Display {
 					}
 				}
 				if (!exists){
-					System.out.print(" ");
+					if (i == 0 && j == 3){
+						System.out.print("K");
+					}
+					else if (i == 7 && j == 3){
+						System.out.print("K");
+					}
+					else{
+						System.out.print(" ");
+					}
+
 				}
 				System.out.print("|");
 				exists = false;
@@ -36,11 +45,6 @@ public class Display {
 	
 	public static void main(String[] str){
 		Board board = Board.getBoardInstance(true);
-		
-		
-		
 		display(board);
-		
-		
 	}
 }

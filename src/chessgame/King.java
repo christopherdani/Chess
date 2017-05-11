@@ -17,7 +17,7 @@ public class King implements Unit {
     }
 
     /**
-     * @return A list of positions where the unit can move.
+     * @return A list of positions where the king can move.
      */
     @Override
     public List<Position> canMove() {
@@ -85,8 +85,11 @@ public class King implements Unit {
      */
     @Override
     public boolean canMove(Position pos) {
-
-
+        List<Position> moves = new ArrayList<Position>();
+        moves = this.canMove();
+        if (moves.contains(pos)){
+            return true;
+        }
         return false;
     }
 

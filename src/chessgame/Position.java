@@ -29,20 +29,7 @@ public class Position {
 	public Position (Position other) throws IllegalArgumentException{
 		this(other.file, other.rank);
 	}
-	
-	public boolean equals(Position other){
-		if (other == null || this == null){
-			return false;
-		}
-		
-		if (this.file != other.file){
-			return false;
-		}
-		if (this.rank != other.rank){
-			return false;
-		}
-		return true;
-	}
+
 
 	public int getFile() {
 		return this.file;
@@ -85,7 +72,24 @@ public class Position {
 	public String toString() {
 		return "(" +file + ", " + rank+ ")";
 	}
-	
-	
+
+	/**
+	 * Checks if 2 Position objects are equal, returns true if its file and rank are equal.
+	 * @param other
+	 * @return true if file and rank are equal, false otherwise.
+	 */
+	public boolean equals(Position other){
+		if (other == null || this == null){
+			return false;
+		}
+
+		if (this.file != other.file){
+			return false;
+		}
+		if (this.rank != other.rank){
+			return false;
+		}
+		return true;
+	}
 	
 }
