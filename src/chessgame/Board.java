@@ -7,14 +7,25 @@ import java.util.List;
  * A singleton class containing an instance of the board that the game will be played on.
  */
 public class Board {
-	
+
+	/**
+	 * The list of pawns on the board.
+	 */
 	public static List<Pawn> pawns;
+
+	/**
+	 * The list of kings on the board.
+	 */
 	public static List<King> kings;
+
 	private static Board board;
 	private Position[][] game;
 
+	/**
+	 * Singleton constructor
+	 * @param start Creates a new game if true.
+	 */
 	private Board(boolean start){
-		
 		Board.pawns = new ArrayList<Pawn>();
 		Board.kings = new ArrayList<King>();
 		if (start){
@@ -56,7 +67,11 @@ public class Board {
 		return board;
 	}
 
-
+	/**
+	 * True if the position is occupied by a unit, false otherwise.
+	 * @param pos The position to be checked.
+	 * @return True if the position is occupied by a unit, false otherwise.
+	 */
 	public static Boolean isOccupied(Position pos){
 		for (Pawn pawn : pawns){
 			if (pawn.getPos() == pos){
@@ -65,7 +80,8 @@ public class Board {
 		}
 		return false;
 	}
-	
+
+
 	public void move(){
 		
 	}

@@ -1,7 +1,37 @@
 package chessgame;
 
+/**
+ * A class to display the chess board.
+ */
 public class Display {
-	
+
+	/**
+	 * Displays a simple ASCII representation of the chess board. <br>
+	 * The upper part of the board is the black units and the lower is the white units. <br>
+	 * This still needs to be improved to show distinction between the 2 colors. <br>
+	 *
+	 * <pre>
+	 *     a  b  c  d  e  f  g  h
+	 *  8 |R||N||B||K||Q||B||N||R| 8
+	 *  7 |P||P||P||P||P||P||P||P| 7
+	 *  6 | || || || || || || || | 6
+	 *  5 | || || || || || || || | 5
+	 *  4 | || || || || || || || | 4
+	 *  3 | || || || || || || || | 3
+	 *  2 |P||P||P||P||P||P||P||P| 2
+	 *  1 |R||N||B||K||Q||B||N||R| 1
+	 *     a  b  c  d  e  f  g  h
+	 * </pre>
+	 *
+	 * Where: <br>
+	 * P = Pawn <br>
+	 * R = Rook <br>
+	 * N = Knight <br>
+	 * K = King <br>
+	 * Q = Queen <br>
+	 *
+	 * @param board The board to display.
+	 */
 	public static void display(Board board){
 		Boolean exists = false;
 		int file = 8;
@@ -38,11 +68,6 @@ public class Display {
 		
 	}
 
-	
-	
-	
-	
-	
 	public static void main(String[] str){
 		Board board = Board.getBoardInstance(true);
 		display(board);
