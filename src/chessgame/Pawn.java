@@ -31,11 +31,22 @@ public class Pawn implements Unit{
 	}
 
 	/**
+	 * Gets the color of the unit, 0 if white, 1 if black.
+	 *
+	 * @return 0 = white, 1 = black.
+	 */
+	@Override
+	public int getColor() {
+		return this.color;
+	}
+
+	/**
 	 * Sets the position of the pawn.
 	 * @param pos The position of the pawn.
 	 */
+	@Override
 	public void setPos(Position pos) {
-		this.pos = pos;
+		this.pos = new Position(pos);
 	}
 
 	/**
@@ -48,11 +59,12 @@ public class Pawn implements Unit{
 		List<Position> paths = new ArrayList<Position>();
 		Position current = this.getPos();
 		Position move;
+		//If white pawn, then try to move up the board, and down if black.
 		if (this.color == 0) {
-			move = new Position(current.getFile() + 1, current.getRank());
+			move = Position.turnUp(current);
 		}
 		else {
-			move = new Position(current.getFile() - 1, current.getRank());
+			move = Position.turnDown(current);
 		}
 		if (!Board.isOccupied(move)){
 			paths.add(move);

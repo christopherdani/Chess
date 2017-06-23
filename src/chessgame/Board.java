@@ -9,6 +9,11 @@ import java.util.List;
 public class Board {
 
 	/**
+	 * The list of all units on the board.
+	 */
+	public static List<Unit> units;
+
+	/**
 	 * The list of pawns on the board.
 	 */
 	public static List<Pawn> pawns;
@@ -28,13 +33,19 @@ public class Board {
 	private Board(boolean start){
 		Board.pawns = new ArrayList<Pawn>();
 		Board.kings = new ArrayList<King>();
+		Board.units = new ArrayList<Unit>();
 		if (start){
 			//Fill the board with units in its initial positions
 
 			//Create black king
-			kings.add(new King(new Position(3,7),1));
+			King king1 = new King(new Position(3,7),1);
+			kings.add(king1);
+			units.add(king1);
+
 			//Create white king
-			kings.add(new King(new Position(3,0),0));
+			King king2 = new King(new Position(3,0),0);
+			kings.add(king2);
+			units.add(king2);
 
 			for (int i = 0; i < 8; i++){
 				for (int j = 0; j < 8; j++){
@@ -42,11 +53,13 @@ public class Board {
 					if (j == 1){
 						Pawn pawn = new Pawn(new Position(i ,j), 1);
 						pawns.add(pawn);
+						units.add(pawn);
 					}
 					//Create white pawns
 					else if (j == 6){
 						Pawn pawn = new Pawn(new Position(i ,j), 0);
 						pawns.add(pawn);
+						units.add(pawn);
 					}
 
 				}
@@ -73,8 +86,8 @@ public class Board {
 	 * @return True if the position is occupied by a unit, false otherwise.
 	 */
 	public static Boolean isOccupied(Position pos){
-		for (Pawn pawn : pawns){
-			if (pawn.getPos() == pos){
+		for (Unit unit : units) {
+			if (unit.getPos().equals(pos)) {
 				return true;
 			}
 		}
@@ -82,11 +95,32 @@ public class Board {
 	}
 
 
-	public void move(){
-		
+	/**
+	 *
+	 * @param init Initial unit position
+	 * @param des Destination position
+	 */
+	public static void move(Position init, Position des){
+		//Check if a unit occupies the initial position.
+		for (Unit unit : Board.units){
+			if (unit.getPos().equals(init)){
+				//Check if the unit can move to des
+				System.out.println(unit.getColor());
+				System.out.println(unit.canMove());
+
+				for (Position pos : unit.canMove()){
+					if (pos.equals(des)){
+						System.out.println("Test2");
+						unit.setPos(des);
+					}
+				}
+
+			}
+		}
+
 	}
 	
-	public void kill(){
+	public static void kill(){
 		
 	}
 	

@@ -31,6 +31,18 @@ public interface Unit {
 	public Position getPos();
 
 	/**
+	 * Gets the color of the unit, 0 if white, 1 if black.
+	 * @return 0 = white, 1 = black.
+	 */
+	public int getColor();
+
+	/**
+	 * Sets the position of the pawn.
+	 * @param pos The position of the pawn.
+	 */
+	public void setPos(Position pos);
+
+	/**
 	 * Gets a list of positions where the unit can kill a unit and move to it.
 	 * @return A list of positions where the unit can kill, then move to it.
 	 */

@@ -12,6 +12,16 @@ public class King implements Unit {
     private int color;
 
     /**
+     * Gets the color of the unit, 0 if white, 1 if black.
+     *
+     * @return 0 = white, 1 = black.
+     */
+    @Override
+    public int getColor() {
+        return this.color;
+    }
+
+    /**
      * Create a king.
      * @param pos The initial position where the king is to be spawned.
      * @param color The color of the king.
@@ -19,6 +29,16 @@ public class King implements Unit {
     public King(Position pos, int color){
         this.pos = pos;
         this.color = color;
+    }
+
+    /**
+     * Sets the position of the pawn.
+     *
+     * @param pos The position of the pawn.
+     */
+    @Override
+    public void setPos(Position pos) {
+        this.pos = new Position(pos);
     }
 
     /**

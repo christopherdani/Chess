@@ -38,25 +38,28 @@ public class Display {
 		System.out.println("   a  b  c  d  e  f  g  h");
 		for (int i = 0; i < 8; i++){
 			System.out.print(file - i + " ");
+
 			for (int j = 0; j < 8; j++){
 				System.out.print("|");
-				for (Pawn pawn : Board.pawns){
-					if (pawn.getPos().equals(new Position(j,i))){
-						System.out.print("P");
-						exists = true;
+
+				for (Unit unit : Board.units){
+
+					if (unit.getPos().equals(new Position(i,j))) {
+
+						if (Pawn.class.isInstance(unit)) {
+							System.out.print("P");
+							exists = true;
+						}
+
+						else if (King.class.isInstance(unit)) {
+							System.out.print("K");
+							exists = true;
+						}
 					}
 				}
+				//Print out blank if no unit exists at that position.
 				if (!exists){
-					if (i == 0 && j == 3){
-						System.out.print("K");
-					}
-					else if (i == 7 && j == 3){
-						System.out.print("K");
-					}
-					else{
-						System.out.print(" ");
-					}
-
+					System.out.print(" ");
 				}
 				System.out.print("|");
 				exists = false;
@@ -65,11 +68,15 @@ public class Display {
 			System.out.println(file - i);
 		}
 		System.out.println("   a  b  c  d  e  f  g  h");
-		
+
 	}
 
 	public static void main(String[] str){
 		Board board = Board.getBoardInstance(true);
+		display(board);
+		Position init = new Position(0,1);
+		Position des = new Position(1,1);
+		Board.move(init, des);
 		display(board);
 	}
 }

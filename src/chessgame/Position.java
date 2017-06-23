@@ -59,7 +59,9 @@ public class Position {
 	 */
 	public static Position turnLeft (Position pos) {
 		if (pos.getRank() < 1){
-			return pos;
+			if (Board.isOccupied(pos)) {
+				return pos;
+			}
 		}
 		return new Position(pos.getFile(), pos.getRank() - 1);
 	}
@@ -67,11 +69,13 @@ public class Position {
 	/**
 	 * Turn right on the board.
 	 * @param pos The position from which you want to turn to.
-	 * @return A position right to pos or pos if cannot turn left.
+	 * @return A position right to pos or pos if cannot turn right.
 	 */
 	public static Position turnRight (Position pos) {
 		if (pos.getRank() > 7){
-			return pos;
+			if (Board.isOccupied(pos)) {
+				return pos;
+			}
 		}
 		return new Position(pos.getFile(), pos.getRank() + 1);
 	}
@@ -79,11 +83,13 @@ public class Position {
 	/**
 	 * Turn up on the board.
 	 * @param pos The position from which you want to turn to.
-	 * @return A position up to pos or pos if cannot turn left.
+	 * @return A position up to pos or pos if cannot turn up.
 	 */
 	public static Position turnUp (Position pos) {
 		if (pos.getFile() < 1){
-			return pos;
+			if (Board.isOccupied(pos)) {
+				return pos;
+			}
 		}
 		return new Position(pos.getFile() - 1, pos.getRank());
 	}
@@ -91,11 +97,13 @@ public class Position {
 	/**
 	 * Turn down on the board.
 	 * @param pos The position from which you want to turn to.
-	 * @return A position down to pos or pos if cannot turn left.
+	 * @return A position down to pos or pos if cannot turn down.
 	 */
 	public static Position turnDown (Position pos) {
 		if (pos.getRank() > 7){
-			return pos;
+			if (Board.isOccupied(pos)) {
+				return pos;
+			}
 		}
 		return new Position(pos.getFile() + 1, pos.getRank());
 	}
