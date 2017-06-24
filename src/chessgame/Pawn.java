@@ -58,17 +58,40 @@ public class Pawn implements Unit{
 		//Implement en passant!
 		List<Position> paths = new ArrayList<Position>();
 		Position current = this.getPos();
-		Position move;
+		Position move, twoTileMove;
+
 		//If white pawn, then try to move up the board, and down if black.
 		if (this.color == 0) {
 			move = Position.turnUp(current);
+
+			//If the pawn is at its starting position, then allow it to move 2 tiles up or down
+			for (int i = 0; i < 8; i++) {
+				if (this.getPos().equals(new Position(6, i))) {
+					twoTileMove = Position.turnUp(move);
+					if (!Board.isOccupied(twoTileMove)){
+						paths.add(twoTileMove);
+					}
+				}
+			}
 		}
 		else {
 			move = Position.turnDown(current);
+
+			for (int i = 0; i < 8; i++) {
+				if (this.getPos().equals(new Position(1, i))) {
+					twoTileMove = Position.turnDown(move);
+					if (!Board.isOccupied(twoTileMove)){
+						paths.add(twoTileMove);
+					}
+				}
+			}
 		}
 		if (!Board.isOccupied(move)){
 			paths.add(move);
 		}
+
+
+
 		return paths;
 	}
 
@@ -79,10 +102,7 @@ public class Pawn implements Unit{
 	 */
 	@Override
 	public boolean canMove(Position pos) {
-		if (this.color == 0 && !Board.isOccupied(new Position(pos.getFile() + 1, this.getPos().getRank()))){
-			return true;
-		}
-		else if (this.color == 1 && !Board.isOccupied(new Position(pos.getFile() - 1, this.getPos().getRank()))){
+		if (!this.canMove().isEmpty()){
 			return true;
 		}
 		return false;
@@ -97,13 +117,14 @@ public class Pawn implements Unit{
 		List<Position> killPositions = new ArrayList<Position>();
 		Position current = this.getPos();
 		Position killPos1, killPos2;
+
 		if (this.color == 0) {
-			killPos1 = new Position(current.getFile() + 1, current.getRank() + 1);
-			killPos2 = new Position(current.getFile() + 1, current.getRank() - 1);
+			killPos1 = new Position(current.getRank() + 1, current.getFile() + 1);
+			killPos2 = new Position(current.getRank() + 1, current.getFile() - 1);
 		}
 		else {
-			killPos1 = new Position(current.getFile() - 1, current.getRank() + 1);
-			killPos2 = new Position(current.getFile() - 1, current.getRank() - 1);
+			killPos1 = new Position(current.getRank() - 1, current.getFile() + 1);
+			killPos2 = new Position(current.getRank() - 1, current.getFile() - 1);
 		}
 		// Implement en passant later!
 		if (Board.isOccupied(killPos1)){
@@ -122,7 +143,7 @@ public class Pawn implements Unit{
 	 */
 	@Override
 	public boolean canKill(Position pos) {
-		if (!this.canKill().isEmpty()){
+		if (this.canKill().contains(pos)){
 			return true;
 		}
 		return false;

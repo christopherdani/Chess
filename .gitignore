@@ -1,0 +1,5 @@
+#Ignore everything that is not necessary for the program.
+*.idea
+*out
+*.settings
+*.gitignore

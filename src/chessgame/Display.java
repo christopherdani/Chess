@@ -74,9 +74,23 @@ public class Display {
 	public static void main(String[] str){
 		Board board = Board.getBoardInstance(true);
 		display(board);
-		Position init = new Position(0,1);
-		Position des = new Position(1,1);
+
+		Position init = new Position(1,0);
+		Position init2 = new Position(1,1);
+		Position des = new Position(3,0);
+		Position des2 = new Position(2,1);
 		Board.move(init, des);
+		Board.move(init2, des2);
+		display(board);
+
+		Position init3 = new Position(2,1);
+		Position des3 = new Position(4, 1);
+		Board.move(init3, des3);
+		display(board);
+
+		Position init4 = new Position(3,0);
+		Position des4 = new Position(2,0);
+		Board.move(init4, des4);
 		display(board);
 	}
 }

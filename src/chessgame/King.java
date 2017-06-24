@@ -134,7 +134,62 @@ public class King implements Unit {
      */
     @Override
     public List<Position> canKill() {
-        return null;
+        List<Position> kills = new ArrayList<Position>();
+
+        Position current = this.getPos();
+        Position down = Position.turnDown(current);
+        if (!down.equals(current) && Board.isAllyOccupied(this, down)){
+            kills.add(down);
+        }
+
+        Position up = Position.turnUp(current);
+        if (!up.equals(current) && Board.isAllyOccupied(this, up)){
+            kills.add(up);
+        }
+
+        Position left = Position.turnLeft(current);
+        if (!left.equals(current) && Board.isAllyOccupied(this, left)){
+            kills.add(left);
+        }
+
+        Position right = Position.turnRight(current);
+        if (!right.equals(current) && Board.isAllyOccupied(this, right)){
+            kills.add(right);
+        }
+
+        Position upRight = Position.turnRight(current);
+        if (!upRight.equals(current)){
+            upRight = Position.turnUp(upRight);
+            if (!upRight.equals(current) && Board.isAllyOccupied(this, upRight)) {
+                kills.add(upRight);
+            }
+        }
+
+        Position upLeft = Position.turnLeft(current);
+        if (!upLeft.equals(current)){
+            upLeft = Position.turnUp(upLeft);
+            if (!upLeft.equals(current) && Board.isAllyOccupied(this, upLeft)) {
+                kills.add(upLeft);
+            }
+        }
+
+        Position downLeft = Position.turnLeft(current);
+        if (!downLeft.equals(current)){
+            downLeft = Position.turnDown(downLeft);
+            if (!downLeft.equals(current) && Board.isAllyOccupied(this, downLeft)) {
+                kills.add(downLeft);
+            }
+        }
+
+        Position downRight = Position.turnRight(current);
+        if (!downRight.equals(current)){
+            downRight = Position.turnDown(downRight);
+            if (!downRight.equals(current) && Board.isAllyOccupied(this, downRight)) {
+                kills.add(downRight);
+            }
+        }
+
+        return kills;
     }
 
     /**
@@ -144,6 +199,11 @@ public class King implements Unit {
      */
     @Override
     public boolean canKill(Position pos) {
+        List<Position> kills = new ArrayList<Position>();
+        kills = this.canKill();
+        if (kills.contains(pos)){
+            return true;
+        }
         return false;
     }
 }

@@ -38,12 +38,12 @@ public class Board {
 			//Fill the board with units in its initial positions
 
 			//Create black king
-			King king1 = new King(new Position(3,7),1);
+			King king1 = new King(new Position(7,3),1);
 			kings.add(king1);
 			units.add(king1);
 
 			//Create white king
-			King king2 = new King(new Position(3,0),0);
+			King king2 = new King(new Position(0,3),0);
 			kings.add(king2);
 			units.add(king2);
 
@@ -51,13 +51,14 @@ public class Board {
 				for (int j = 0; j < 8; j++){
 					//Create black pawns
 					if (j == 1){
-						Pawn pawn = new Pawn(new Position(i ,j), 1);
+						//Put in the rank first (j)
+						Pawn pawn = new Pawn(new Position(j ,i), 1);
 						pawns.add(pawn);
 						units.add(pawn);
 					}
 					//Create white pawns
 					else if (j == 6){
-						Pawn pawn = new Pawn(new Position(i ,j), 0);
+						Pawn pawn = new Pawn(new Position(j ,i), 0);
 						pawns.add(pawn);
 						units.add(pawn);
 					}
@@ -75,7 +76,6 @@ public class Board {
 	public static Board getBoardInstance(boolean game){
 		if (board == null){
 			Board board = new Board(game);
-			
 		}
 		return board;
 	}
@@ -94,23 +94,38 @@ public class Board {
 		return false;
 	}
 
+	/**
+	 * Checks if the des is occupied by an ally.
+	 * @param init The unit that is to be checked against.
+	 * @param des The destination position that is to be checked.
+	 * @return true if it is occupied by an allied unit. False if not occupied or occupied by enemy unit.
+	 */
+	public static Boolean isAllyOccupied(Unit init, Position des){
+		for (Unit unit : units) {
+			if (unit.getPos().equals(des)) {
+				if (unit.getColor() == init.getColor()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 
 	/**
-	 *
+	 * Moves the unit from init to des if possible.
 	 * @param init Initial unit position
 	 * @param des Destination position
 	 */
 	public static void move(Position init, Position des){
 		//Check if a unit occupies the initial position.
 		for (Unit unit : Board.units){
+
 			if (unit.getPos().equals(init)){
 				//Check if the unit can move to des
-				System.out.println(unit.getColor());
-				System.out.println(unit.canMove());
 
 				for (Position pos : unit.canMove()){
 					if (pos.equals(des)){
-						System.out.println("Test2");
 						unit.setPos(des);
 					}
 				}

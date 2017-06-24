@@ -19,10 +19,10 @@ public class Position {
 	 * @param rank  The row of the position
 	 * @throws IllegalArgumentException If file or rank is outside of the board
 	 */
-	public Position(int file, int rank) throws IllegalArgumentException{
+	public Position(int rank, int file) throws IllegalArgumentException{
 		//Implement exception!
-		this.file = file;
 		this.rank = rank;
+		this.file = file;
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class Position {
 	 * @throws IllegalArgumentException If other is not valid.
 	 */
 	public Position (Position other) throws IllegalArgumentException{
-		this(other.file, other.rank);
+		this(other.rank, other.file);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Position {
 				return pos;
 			}
 		}
-		return new Position(pos.getFile(), pos.getRank() - 1);
+		return new Position(pos.getRank(), pos.getFile() - 1);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Position {
 				return pos;
 			}
 		}
-		return new Position(pos.getFile(), pos.getRank() + 1);
+		return new Position(pos.getRank(), pos.getFile() + 1);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class Position {
 				return pos;
 			}
 		}
-		return new Position(pos.getFile() - 1, pos.getRank());
+		return new Position(pos.getRank() - 1, pos.getFile());
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Position {
 				return pos;
 			}
 		}
-		return new Position(pos.getFile() + 1, pos.getRank());
+		return new Position(pos.getRank() + 1, pos.getFile());
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class Position {
 	 */
 	@Override
 	public String toString() {
-		return "(" +file + ", " + rank+ ")";
+		return "(" +rank + ", " + file+ ")";
 	}
 
 	/**
