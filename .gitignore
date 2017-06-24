@@ -2,4 +2,7 @@
 *.idea
 *out
 *.settings
-*.gitignore
+*bin
+src/.project
+src/.Chess.iml
+src/.classpath
