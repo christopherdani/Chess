@@ -119,12 +119,12 @@ public class Pawn implements Unit{
 		Position killPos1, killPos2;
 
 		if (this.color == 0) {
-			killPos1 = new Position(current.getRank() + 1, current.getFile() + 1);
-			killPos2 = new Position(current.getRank() + 1, current.getFile() - 1);
-		}
-		else {
 			killPos1 = new Position(current.getRank() - 1, current.getFile() + 1);
 			killPos2 = new Position(current.getRank() - 1, current.getFile() - 1);
+		}
+		else {
+			killPos1 = new Position(current.getRank() + 1, current.getFile() + 1);
+			killPos2 = new Position(current.getRank() + 1, current.getFile() - 1);
 		}
 		// Implement en passant later!
 		if (Board.isOccupied(killPos1)){

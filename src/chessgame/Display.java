@@ -76,21 +76,17 @@ public class Display {
 		display(board);
 
 		Position init = new Position(1,0);
-		Position init2 = new Position(1,1);
 		Position des = new Position(3,0);
-		Position des2 = new Position(2,1);
 		Board.move(init, des);
-		Board.move(init2, des2);
 		display(board);
 
-		Position init3 = new Position(2,1);
-		Position des3 = new Position(4, 1);
-		Board.move(init3, des3);
+		Position init5 = new Position(6,1);
+		Position des5 = new Position(4,1);
+		Board.move(init5,des5);
 		display(board);
 
-		Position init4 = new Position(3,0);
-		Position des4 = new Position(2,0);
-		Board.move(init4, des4);
+
+		Board.kill(des, des5);
 		display(board);
 	}
 }

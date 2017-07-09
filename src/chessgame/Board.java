@@ -134,9 +134,26 @@ public class Board {
 		}
 
 	}
-	
-	public static void kill(){
-		
+
+	/**
+	 * Moves the unit occupying init and kills the unit occupying des if possible.
+	 * @param init The unit that is the "killer"
+	 * @param des The unit that is the "victim"
+	 */
+	public static void kill(Position init, Position des){
+		for (Unit unit : Board.units){
+
+			if (unit.getPos().equals(init)){
+				System.out.println(unit.canKill());
+
+				for (Position pos : unit.canKill()){
+
+					if (pos.equals(des)){
+						unit.setPos(des);
+					}
+				}
+			}
+		}
 	}
 	
 }
