@@ -55,6 +55,11 @@ public class Display {
 							System.out.print("K");
 							exists = true;
 						}
+
+						else if (Rook.class.isInstance(unit)){
+							System.out.print("R");
+							exists = true;
+						}
 					}
 				}
 				//Print out blank if no unit exists at that position.
@@ -75,6 +80,7 @@ public class Display {
 		Board board = Board.getBoardInstance(true);
 		display(board);
 
+		/*
 		Position init = new Position(1,0);
 		Position des = new Position(3,0);
 		Board.move(init, des);
@@ -88,5 +94,12 @@ public class Display {
 
 		Board.kill(des, des5);
 		display(board);
+		*/
+
+		Position rookCheck1 = new Position(7,0);
+		Position rookCheck2 = new Position(7,2);
+		Board.move(rookCheck1, rookCheck2);
+		display(board);
+
 	}
 }

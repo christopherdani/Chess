@@ -56,8 +56,38 @@ public class Rook implements Unit{
                 current = Position.turnUp(current);
                 moves.add(current);
             }
+            else {
+                break;
+            }
         }
-        return null;
+        for (int i = 0; i < 8; i++){
+            if (Position.turnDown(current) != current){
+                current = Position.turnDown(current);
+                moves.add(current);
+            }
+            else {
+                break;
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if (Position.turnLeft(current) != current){
+                current = Position.turnLeft(current);
+                moves.add(current);
+            }
+            else {
+                break;
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if (Position.turnRight(current) != current){
+                current = Position.turnRight(current);
+                moves.add(current);
+            }
+            else {
+                break;
+            }
+        }
+        return moves;
     }
 
     /**
@@ -78,7 +108,7 @@ public class Rook implements Unit{
      */
     @Override
     public Position getPos() {
-        return null;
+        return this.pos;
     }
 
     /**
@@ -102,6 +132,10 @@ public class Rook implements Unit{
         return false;
     }
 
+    /**
+     * A string representation of the rook.
+     * @return A string representation in the format of "Rook [pos= position, color= color]".
+     */
     @Override
     public String toString() {
         return "Rook [pos=" + pos + ", color=" + color + "]";

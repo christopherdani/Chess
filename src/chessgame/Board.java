@@ -22,6 +22,10 @@ public class Board {
 	 * The list of kings on the board.
 	 */
 	public static List<King> kings;
+	/**
+	 * The list of rooks on the board.
+	 */
+	public static List<Rook> rooks;
 
 	private static Board board;
 	private Position[][] game;
@@ -33,6 +37,7 @@ public class Board {
 	private Board(boolean start){
 		Board.pawns = new ArrayList<Pawn>();
 		Board.kings = new ArrayList<King>();
+		Board.rooks = new ArrayList<Rook>();
 		Board.units = new ArrayList<Unit>();
 		if (start){
 			//Fill the board with units in its initial positions
@@ -46,6 +51,24 @@ public class Board {
 			King king2 = new King(new Position(0,3),0);
 			kings.add(king2);
 			units.add(king2);
+
+
+			//Create black rooks
+			Rook rook1 = new Rook(new Position(0,0), 1);
+			rooks.add(rook1);
+			units.add(rook1);
+			Rook rook2 = new Rook(new Position(0,7), 1);
+			rooks.add(rook2);
+			units.add(rook2);
+
+			//Create white rooks
+			Rook rook3 = new Rook(new Position(7,0), 0);
+			rooks.add(rook3);
+			units.add(rook3);
+			Rook rook4 = new Rook(new Position(7,7), 0);
+			rooks.add(rook4);
+			units.add(rook4);
+
 
 			for (int i = 0; i < 8; i++){
 				for (int j = 0; j < 8; j++){
@@ -143,19 +166,19 @@ public class Board {
 	public static void kill(Position init, Position des){
 		for (Unit unit : Board.units){
 
+			//Find the unit at init.
 			if (unit.getPos().equals(init)){
-				//System.out.println(unit.canKill());
 				for (Position pos : unit.canKill()){
 
 					if (pos.equals(des)){
 
-						//find and delete the unit occupying des
+						//Find and delete the unit occupying des
 						for (Unit killed : Board.units){
 							if (killed.getPos().equals(des)){
 								killed.setPos(new Position(-1,-1));
 							}
 						}
-
+						//Finally set the killer unit's new position.
 						unit.setPos(des);
 					}
 				}
