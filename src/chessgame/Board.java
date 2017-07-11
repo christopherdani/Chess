@@ -144,11 +144,18 @@ public class Board {
 		for (Unit unit : Board.units){
 
 			if (unit.getPos().equals(init)){
-				System.out.println(unit.canKill());
-
+				//System.out.println(unit.canKill());
 				for (Position pos : unit.canKill()){
 
 					if (pos.equals(des)){
+
+						//find and delete the unit occupying des
+						for (Unit killed : Board.units){
+							if (killed.getPos().equals(des)){
+								killed.setPos(new Position(-1,-1));
+							}
+						}
+
 						unit.setPos(des);
 					}
 				}
