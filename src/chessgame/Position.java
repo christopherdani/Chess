@@ -58,12 +58,16 @@ public class Position {
 	 * @return A position left to pos or pos if cannot turn left.
 	 */
 	public static Position turnLeft (Position pos) {
-		if (pos.getRank() < 1){
-			if (Board.isOccupied(pos)) {
-				return pos;
+		Position left = new Position(pos.getRank(), pos.getFile() - 1);
+
+		//If the unit is not at the leftmost tile of the board, proceed
+		if (pos.getFile() != 0){
+			if (!Board.isOccupied(left)) {
+				return left;
 			}
 		}
-		return new Position(pos.getRank(), pos.getFile() - 1);
+
+		return pos;
 	}
 
 	/**
@@ -72,12 +76,16 @@ public class Position {
 	 * @return A position right to pos or pos if cannot turn right.
 	 */
 	public static Position turnRight (Position pos) {
-		if (pos.getRank() > 7){
-			if (Board.isOccupied(pos)) {
-				return pos;
+		Position right = new Position(pos.getRank(), pos.getFile() + 1);
+
+		//If the unit is not at the rightmost tile of the board, proceed
+		if (pos.getFile() != 7){
+			if (!Board.isOccupied(right)) {
+				return right;
 			}
 		}
-		return new Position(pos.getRank(), pos.getFile() + 1);
+
+		return pos;
 	}
 
 	/**
@@ -86,12 +94,16 @@ public class Position {
 	 * @return A position up to pos or pos if cannot turn up.
 	 */
 	public static Position turnUp (Position pos) {
-		if (pos.getFile() < 1){
-			if (Board.isOccupied(pos)) {
-				return pos;
+		Position up = new Position(pos.getRank() - 1, pos.getFile());
+
+		//If the unit is not at the rightmost tile of the board, proceed
+		if (pos.getRank() != 0){
+			if (!Board.isOccupied(up)) {
+				return up;
 			}
 		}
-		return new Position(pos.getRank() - 1, pos.getFile());
+
+		return pos;
 	}
 
 	/**
@@ -100,12 +112,16 @@ public class Position {
 	 * @return A position down to pos or pos if cannot turn down.
 	 */
 	public static Position turnDown (Position pos) {
-		if (pos.getRank() > 7){
-			if (Board.isOccupied(pos)) {
-				return pos;
+		Position down = new Position(pos.getRank() + 1, pos.getFile());
+
+		//If the unit is not at the rightmost tile of the board, proceed
+		if (pos.getRank() != 7){
+			if (!Board.isOccupied(down)) {
+				return down;
 			}
 		}
-		return new Position(pos.getRank() + 1, pos.getFile());
+
+		return pos;
 	}
 
 	/**

@@ -178,7 +178,7 @@ public class Board {
 								killed.setPos(new Position(-1,-1));
 							}
 						}
-						//Finally set the killer unit's new position.
+						//Finally set the killer unit's new position at des.
 						unit.setPos(des);
 					}
 				}

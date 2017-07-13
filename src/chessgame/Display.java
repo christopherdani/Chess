@@ -80,7 +80,7 @@ public class Display {
 		Board board = Board.getBoardInstance(true);
 		display(board);
 
-		/*
+
 		Position init = new Position(1,0);
 		Position des = new Position(3,0);
 		Board.move(init, des);
@@ -94,7 +94,7 @@ public class Display {
 
 		Board.kill(des, des5);
 		display(board);
-		*/
+
 
 		Position rookCheck1 = new Position(7,0);
 		Position rookCheck2 = new Position(7,2);
