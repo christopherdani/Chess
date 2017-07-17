@@ -144,29 +144,29 @@ public class King implements Unit {
 
         Position current = this.getPos();
         Position down = Position.turnDown(current);
-        if (!down.equals(current) && Board.isAllyOccupied(this, down)) {
+        if (!down.equals(current) && Board.isEnemyOccupied(this, down)) {
             kills.add(down);
         }
 
         Position up = Position.turnUp(current);
-        if (!up.equals(current) && Board.isAllyOccupied(this, up)) {
+        if (!up.equals(current) && Board.isEnemyOccupied(this, up)) {
             kills.add(up);
         }
 
         Position left = Position.turnLeft(current);
-        if (!left.equals(current) && Board.isAllyOccupied(this, left)) {
+        if (!left.equals(current) && Board.isEnemyOccupied(this, left)) {
             kills.add(left);
         }
 
         Position right = Position.turnRight(current);
-        if (!right.equals(current) && Board.isAllyOccupied(this, right)) {
+        if (!right.equals(current) && Board.isEnemyOccupied(this, right)) {
             kills.add(right);
         }
 
         Position upRight = Position.turnRight(current);
         if (!upRight.equals(current)) {
             upRight = Position.turnUp(upRight);
-            if (!upRight.equals(current) && Board.isAllyOccupied(this, upRight)) {
+            if (!upRight.equals(current) && Board.isEnemyOccupied(this, upRight)) {
                 kills.add(upRight);
             }
         }
@@ -174,7 +174,7 @@ public class King implements Unit {
         Position upLeft = Position.turnLeft(current);
         if (!upLeft.equals(current)) {
             upLeft = Position.turnUp(upLeft);
-            if (!upLeft.equals(current) && Board.isAllyOccupied(this, upLeft)) {
+            if (!upLeft.equals(current) && Board.isEnemyOccupied(this, upLeft)) {
                 kills.add(upLeft);
             }
         }
@@ -182,7 +182,7 @@ public class King implements Unit {
         Position downLeft = Position.turnLeft(current);
         if (!downLeft.equals(current)) {
             downLeft = Position.turnDown(downLeft);
-            if (!downLeft.equals(current) && Board.isAllyOccupied(this, downLeft)) {
+            if (!downLeft.equals(current) && Board.isEnemyOccupied(this, downLeft)) {
                 kills.add(downLeft);
             }
         }
@@ -190,7 +190,7 @@ public class King implements Unit {
         Position downRight = Position.turnRight(current);
         if (!downRight.equals(current)) {
             downRight = Position.turnDown(downRight);
-            if (!downRight.equals(current) && Board.isAllyOccupied(this, downRight)) {
+            if (!downRight.equals(current) && Board.isEnemyOccupied(this, downRight)) {
                 kills.add(downRight);
             }
         }

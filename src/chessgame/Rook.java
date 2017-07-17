@@ -54,7 +54,9 @@ public class Rook implements Unit{
         for (int i = 0; i < 8; i++){
             if (Position.turnUp(current) != current){
                 current = Position.turnUp(current);
-                moves.add(current);
+                if (!Board.isOccupied(current)){
+                    moves.add(current);
+                }
             }
             else {
                 break;
@@ -63,7 +65,9 @@ public class Rook implements Unit{
         for (int i = 0; i < 8; i++){
             if (Position.turnDown(current) != current){
                 current = Position.turnDown(current);
-                moves.add(current);
+                if (!Board.isOccupied(current)){
+                    moves.add(current);
+                }
             }
             else {
                 break;
@@ -72,7 +76,9 @@ public class Rook implements Unit{
         for (int i = 0; i < 8; i++){
             if (Position.turnLeft(current) != current){
                 current = Position.turnLeft(current);
-                moves.add(current);
+                if (!Board.isOccupied(current)){
+                    moves.add(current);
+                }
             }
             else {
                 break;
@@ -81,7 +87,9 @@ public class Rook implements Unit{
         for (int i = 0; i < 8; i++){
             if (Position.turnRight(current) != current){
                 current = Position.turnRight(current);
-                moves.add(current);
+                if (!Board.isOccupied(current)){
+                    moves.add(current);
+                }
             }
             else {
                 break;
@@ -98,6 +106,11 @@ public class Rook implements Unit{
      */
     @Override
     public boolean canMove(Position pos) {
+        List<Position> moves = new ArrayList<Position>();
+        moves = this.canMove();
+        if (moves.contains(pos)) {
+            return true;
+        }
         return false;
     }
 
@@ -118,7 +131,55 @@ public class Rook implements Unit{
      */
     @Override
     public List<Position> canKill() {
-        return null;
+        List<Position> moves = new ArrayList<Position>();
+
+        Position current = this.getPos();
+        for (int i = 0; i < 8; i++){
+            if (Position.turnUp(current) != current){
+                current = Position.turnUp(current);
+                if (Board.isEnemyOccupied(this, current)){
+                    moves.add(current);
+                }
+
+            }
+            else {
+                break;
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if (Position.turnDown(current) != current){
+                current = Position.turnDown(current);
+                if (Board.isEnemyOccupied(this, current)){
+                    moves.add(current);
+                }
+            }
+            else {
+                break;
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if (Position.turnLeft(current) != current){
+                current = Position.turnLeft(current);
+                if (Board.isEnemyOccupied(this, current)){
+                    moves.add(current);
+                }
+            }
+            else {
+                break;
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if (Position.turnRight(current) != current){
+                current = Position.turnRight(current);
+                if (Board.isEnemyOccupied(this, current)){
+                    moves.add(current);
+                }
+            }
+            else {
+                break;
+            }
+        }
+        return moves;
     }
 
     /**
@@ -129,6 +190,11 @@ public class Rook implements Unit{
      */
     @Override
     public boolean canKill(Position pos) {
+        List<Position> kills = new ArrayList<Position>();
+        kills = this.canKill();
+        if (kills.contains(pos)) {
+            return true;
+        }
         return false;
     }
 

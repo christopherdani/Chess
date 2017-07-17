@@ -63,25 +63,27 @@ public class Pawn implements Unit{
 		//If white pawn, then try to move up the board, and down if black.
 		if (this.color == 0) {
 			move = Position.turnUp(current);
-
-			//If the pawn is at its starting position, then allow it to move 2 tiles up or down
-			for (int i = 0; i < 8; i++) {
-				if (this.getPos().equals(new Position(6, i))) {
-					twoTileMove = Position.turnUp(move);
-					if (!Board.isOccupied(twoTileMove)){
-						paths.add(twoTileMove);
+			if (!Board.isOccupied(move)) {
+				//If the pawn is at its starting position, then allow it to move 2 tiles up or down
+				for (int i = 0; i < 8; i++) {
+					if (this.getPos().equals(new Position(6, i))) {
+						twoTileMove = Position.turnUp(move);
+						if (!Board.isOccupied(twoTileMove)) {
+							paths.add(twoTileMove);
+						}
 					}
 				}
 			}
 		}
 		else {
 			move = Position.turnDown(current);
-
-			for (int i = 0; i < 8; i++) {
-				if (this.getPos().equals(new Position(1, i))) {
-					twoTileMove = Position.turnDown(move);
-					if (!Board.isOccupied(twoTileMove)){
-						paths.add(twoTileMove);
+			if (!Board.isOccupied(move)) {
+				for (int i = 0; i < 8; i++) {
+					if (this.getPos().equals(new Position(1, i))) {
+						twoTileMove = Position.turnDown(move);
+						if (!Board.isOccupied(twoTileMove)) {
+							paths.add(twoTileMove);
+						}
 					}
 				}
 			}
@@ -127,10 +129,10 @@ public class Pawn implements Unit{
 			killPos2 = new Position(current.getRank() + 1, current.getFile() - 1);
 		}
 		// Implement en passant later!
-		if (Board.isOccupied(killPos1)){
+		if (Board.isEnemyOccupied(this, killPos1)){
 			killPositions.add(killPos1);
 		}
-		if (Board.isOccupied(killPos2)){
+		if (Board.isEnemyOccupied(this, killPos2)){
 			killPositions.add(killPos2);
 		}
 		return killPositions;

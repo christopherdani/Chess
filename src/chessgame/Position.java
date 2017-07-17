@@ -62,9 +62,8 @@ public class Position {
 
 		//If the unit is not at the leftmost tile of the board, proceed
 		if (pos.getFile() != 0){
-			if (!Board.isOccupied(left)) {
+
 				return left;
-			}
 		}
 
 		return pos;
@@ -80,9 +79,9 @@ public class Position {
 
 		//If the unit is not at the rightmost tile of the board, proceed
 		if (pos.getFile() != 7){
-			if (!Board.isOccupied(right)) {
+
 				return right;
-			}
+
 		}
 
 		return pos;
@@ -96,11 +95,11 @@ public class Position {
 	public static Position turnUp (Position pos) {
 		Position up = new Position(pos.getRank() - 1, pos.getFile());
 
-		//If the unit is not at the rightmost tile of the board, proceed
+		//If the unit is not at the highest tile of the board, proceed
 		if (pos.getRank() != 0){
-			if (!Board.isOccupied(up)) {
+
 				return up;
-			}
+
 		}
 
 		return pos;
@@ -114,11 +113,11 @@ public class Position {
 	public static Position turnDown (Position pos) {
 		Position down = new Position(pos.getRank() + 1, pos.getFile());
 
-		//If the unit is not at the rightmost tile of the board, proceed
+		//If the unit is not at the lowest tile of the board, proceed
 		if (pos.getRank() != 7){
-			if (!Board.isOccupied(down)) {
+
 				return down;
-			}
+
 		}
 
 		return pos;

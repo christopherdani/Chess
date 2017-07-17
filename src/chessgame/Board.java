@@ -118,6 +118,23 @@ public class Board {
 	}
 
 	/**
+	 * Checks if the des is occupied by an enemy.
+	 * @param init The unit that is to be checked against.
+	 * @param des The destination position that is to be checked.
+	 * @return true if it is occupied by an enemy unit. False if not occupied or occupied by ally unit.
+	 */
+	public static Boolean isEnemyOccupied(Unit init, Position des){
+		for (Unit unit : units) {
+			if (unit.getPos().equals(des)) {
+				if (unit.getColor() != init.getColor()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Checks if the des is occupied by an ally.
 	 * @param init The unit that is to be checked against.
 	 * @param des The destination position that is to be checked.
