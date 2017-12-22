@@ -60,6 +60,11 @@ public class Display {
 							System.out.print("R");
 							exists = true;
 						}
+
+						else if (Bishop.class.isInstance(unit)){
+							System.out.print("B");
+							exists = true;
+						}
 					}
 				}
 				//Print out blank if no unit exists at that position.
@@ -80,26 +85,30 @@ public class Display {
 		Board board = Board.getBoardInstance(true);
 		display(board);
 
-
-		Position init = new Position(1,0);
-		Position des = new Position(3,0);
-		Board.move(init, des);
-		display(board);
-
-		Position init5 = new Position(6,1);
-		Position des5 = new Position(4,1);
-		Board.move(init5,des5);
-		display(board);
+		Position init = new Position(4,3);
+		Position des = new Position(5,4);
+		Board.kill(init, des);
 
 
-		Board.kill(des, des5);
-		display(board);
-
-
-		Position rookCheck1 = new Position(7,0);
-		Position rookCheck2 = new Position(7,2);
-		Board.move(rookCheck1, rookCheck2);
-		display(board);
+//		Position init = new Position(1,0);
+//		Position des = new Position(3,0);
+//		Board.move(init, des);
+//		display(board);
+//
+//		Position init5 = new Position(6,1);
+//		Position des5 = new Position(4,1);
+//		Board.move(init5,des5);
+//		display(board);
+//
+//
+//		Board.kill(des, des5);
+//		display(board);
+//
+//
+//		Position rookCheck1 = new Position(7,0);
+//		Position rookCheck2 = new Position(7,2);
+//		Board.move(rookCheck1, rookCheck2);
+//		display(board);
 
 	}
 }

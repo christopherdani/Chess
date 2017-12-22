@@ -3,52 +3,19 @@ package chessgame;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Christopher Dani on 2017-06-23.
- */
-public class Rook implements Unit{
+public class Bishop implements Unit{
 
     private Position pos;
     private int color;
 
     /**
-     * Create a pawn.
-     * @param pos The initial position where the pawn is to be spawned.
-     * @param color The color of the pawn.
+     * Create a bishop.
+     * @param pos The initial position where the bishop is to be spawned.
+     * @param color The color of the bishop.
      */
-    public Rook(Position pos, int color){
+    public Bishop(Position pos, int color){
         this.pos = pos;
         this.color = color;
-    }
-
-    /**
-     * Gets the color of the unit, 0 if white, 1 if black.
-     *
-     * @return 0 = white, 1 = black.
-     */
-    @Override
-    public int getColor() {
-        return this.color;
-    }
-
-    /**
-     * Sets the position of the pawn.
-     *
-     * @param pos The position of the pawn.
-     */
-    @Override
-    public void setPos(Position pos) {
-        this.pos = new Position(pos);
-    }
-
-    /**
-     * Gets the position of the unit.
-     *
-     * @return The unit's position
-     */
-    @Override
-    public Position getPos() {
-        return this.pos;
     }
 
     /**
@@ -62,39 +29,39 @@ public class Rook implements Unit{
 
         Position current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnUp(current).equals(current) ){
+            if (Position.turnUpRight(current).equals(current) ){
                 break;
             }
             else {
-                if (!Board.isOccupied(Position.turnUp(current))){
-                    moves.add(Position.turnUp(current));
-                    current = Position.turnUp(current);
+                if (!Board.isOccupied(Position.turnUpRight(current))){
+                    moves.add(Position.turnUpRight(current));
+                    current = Position.turnUpRight(current);
                 }
             }
         }
 
         current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnLeft(current).equals(current) ){
+            if (Position.turnUpLeft(current).equals(current) ){
                 break;
             }
             else {
-                if (!Board.isOccupied(Position.turnLeft(current))){
-                    moves.add(Position.turnLeft(current));
-                    current = Position.turnLeft(current);
+                if (!Board.isOccupied(Position.turnUpLeft(current))){
+                    moves.add(Position.turnUpLeft(current));
+                    current = Position.turnUpLeft(current);
                 }
             }
         }
 
         current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnDown(current).equals(current) ){
+            if (Position.turnDownLeft(current).equals(current) ){
                 break;
             }
             else {
-                if (!Board.isOccupied(Position.turnDown(current))){
-                    moves.add(Position.turnDown(current));
-                    current = Position.turnDown(current);
+                if (!Board.isOccupied(Position.turnDownLeft(current))){
+                    moves.add(Position.turnDownLeft(current));
+                    current = Position.turnDownLeft(current);
                 }
             }
         }
@@ -105,9 +72,9 @@ public class Rook implements Unit{
                 break;
             }
             else {
-                if (!Board.isOccupied(Position.turnRight(current))){
-                    moves.add(Position.turnRight(current));
-                    current = Position.turnRight(current);
+                if (!Board.isOccupied(Position.turnDownRight(current))){
+                    moves.add(Position.turnDownRight(current));
+                    current = Position.turnDownRight(current);
                 }
             }
         }
@@ -132,6 +99,36 @@ public class Rook implements Unit{
     }
 
     /**
+     * Gets the position of the unit.
+     *
+     * @return The unit's position
+     */
+    @Override
+    public Position getPos() {
+        return this.pos;
+    }
+
+    /**
+     * Gets the color of the unit, 0 if white, 1 if black.
+     *
+     * @return 0 = white, 1 = black.
+     */
+    @Override
+    public int getColor() {
+        return this.color;
+    }
+
+    /**
+     * Sets the position of the pawn.
+     *
+     * @param pos The position of the pawn.
+     */
+    @Override
+    public void setPos(Position pos) {
+        this.pos = new Position(pos);
+    }
+
+    /**
      * Gets a list of positions where the unit can kill a unit and move to it.
      *
      * @return A list of positions where the unit can kill, then move to it.
@@ -142,69 +139,69 @@ public class Rook implements Unit{
 
         Position current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnUp(current).equals(current) ){
+            if (Position.turnUpRight(current).equals(current) ){
                 break;
             }
             else {
-                if (Board.isEnemyOccupied(this, Position.turnUp(current))){
-                    kills.add(Position.turnUp(current));
+                if (Board.isEnemyOccupied(this, Position.turnUpRight(current))){
+                    kills.add(Position.turnUpRight(current));
                     break;
                 }
-                else if (Board.isAllyOccupied(this, Position.turnUp(current))){
+                else if (Board.isAllyOccupied(this, Position.turnUpRight(current))){
                     break;
                 }
-                current = Position.turnUp(current);
+                current = Position.turnUpRight(current);
             }
         }
 
         current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnLeft(current).equals(current) ){
+            if (Position.turnUpLeft(current).equals(current) ){
                 break;
             }
             else {
-                if (Board.isEnemyOccupied(this, Position.turnLeft(current))){
-                    kills.add(Position.turnLeft(current));
+                if (Board.isEnemyOccupied(this, Position.turnUpLeft(current))){
+                    kills.add(Position.turnUpLeft(current));
                     break;
                 }
-                else if (Board.isAllyOccupied(this, Position.turnLeft(current))){
+                else if (Board.isAllyOccupied(this, Position.turnUpLeft(current))){
                     break;
                 }
-                current = Position.turnLeft(current);
+                current = Position.turnUpLeft(current);
             }
         }
 
         current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnDown(current).equals(current) ){
+            if (Position.turnDownLeft(current).equals(current) ){
                 break;
             }
             else {
-                if (Board.isEnemyOccupied(this, Position.turnDown(current))){
-                    kills.add(Position.turnDown(current));
+                if (Board.isEnemyOccupied(this, Position.turnDownLeft(current))){
+                    kills.add(Position.turnDownLeft(current));
                     break;
                 }
-                else if (Board.isAllyOccupied(this, Position.turnDown(current))){
+                else if (Board.isAllyOccupied(this, Position.turnDownLeft(current))){
                     break;
                 }
-                current = Position.turnDown(current);
+                current = Position.turnDownLeft(current);
             }
         }
 
         current = this.getPos();
         for (int i = 0; i < 8; i++){
-            if (Position.turnRight(current).equals(current) ){
+            if (Position.turnDownRight(current).equals(current) ){
                 break;
             }
             else {
-                if (Board.isEnemyOccupied(this, Position.turnRight(current))){
-                    kills.add(Position.turnRight(current));
+                if (Board.isEnemyOccupied(this, Position.turnDownRight(current))){
+                    kills.add(Position.turnDownRight(current));
                     break;
                 }
-                else if (Board.isAllyOccupied(this, Position.turnRight(current))){
+                else if (Board.isAllyOccupied(this, Position.turnDownRight(current))){
                     break;
                 }
-                current = Position.turnRight(current);
+                current = Position.turnDownRight(current);
             }
         }
 
@@ -233,6 +230,6 @@ public class Rook implements Unit{
      */
     @Override
     public String toString() {
-        return "Rook [pos=" + pos + ", color=" + color + "]";
+        return "Bishop [pos=" + pos + ", color=" + color + "]";
     }
 }

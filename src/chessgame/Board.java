@@ -27,6 +27,11 @@ public class Board {
 	 */
 	public static List<Rook> rooks;
 
+	/**
+	 * The list of bishops on the board.
+	 */
+	public static List<Bishop> bishops;
+
 	private static Board board;
 	private Position[][] game;
 
@@ -39,6 +44,7 @@ public class Board {
 		Board.kings = new ArrayList<King>();
 		Board.rooks = new ArrayList<Rook>();
 		Board.units = new ArrayList<Unit>();
+		Board.bishops = new ArrayList<Bishop>();
 		if (start){
 			//Fill the board with units in its initial positions
 
@@ -68,6 +74,16 @@ public class Board {
 			Rook rook4 = new Rook(new Position(7,7), 0);
 			rooks.add(rook4);
 			units.add(rook4);
+
+			//Create Bishop for testing
+			Bishop bis = new Bishop(new Position(4,3), 0);
+			bishops.add(bis);
+			units.add(bis);
+//			King test = new King(new Position(4,3),0);
+//			kings.add(test);
+//			units.add(test);
+
+
 
 
 			for (int i = 0; i < 8; i++){
@@ -202,5 +218,4 @@ public class Board {
 			}
 		}
 	}
-	
 }

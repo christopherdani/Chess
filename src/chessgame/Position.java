@@ -124,6 +124,70 @@ public class Position {
 	}
 
 	/**
+	 * Turn down right on the board.
+	 * @param pos The position from which you want to turn to.
+	 * @return A position down right to pos or pos if cannot turn down.
+	 */
+	public static Position turnDownRight (Position pos) {
+		//If the unit is not at the lowest tile of the board, proceed
+		if (pos.getRank() != 7 && pos.getFile() != 7){
+
+			return new Position(pos.getRank() + 1, pos.getFile() + 1);
+
+		}
+
+		return pos;
+	}
+
+	/**
+	 * Turn down right on the board.
+	 * @param pos The position from which you want to turn to.
+	 * @return A position down right to pos or pos if cannot turn down.
+	 */
+	public static Position turnDownLeft (Position pos) {
+		//If the unit is not at the lowest tile of the board, proceed
+		if (pos.getRank() != 7 && pos.getFile() != 0){
+
+			return new Position(pos.getRank() + 1, pos.getFile() - 1);
+
+		}
+
+		return pos;
+	}
+
+	/**
+	 * Turn down right on the board.
+	 * @param pos The position from which you want to turn to.
+	 * @return A position down right to pos or pos if cannot turn down.
+	 */
+	public static Position turnUpRight (Position pos) {
+		//If the unit is not at the lowest tile of the board, proceed
+		if (pos.getRank() != 0 && pos.getFile() != 7){
+
+			return new Position(pos.getRank() - 1, pos.getFile() + 1);
+
+		}
+
+		return pos;
+	}
+
+	/**
+	 * Turn down right on the board.
+	 * @param pos The position from which you want to turn to.
+	 * @return A position down right to pos or pos if cannot turn down.
+	 */
+	public static Position turnUpLeft (Position pos) {
+		//If the unit is not at the lowest tile of the board, proceed
+		if (pos.getRank() != 0 && pos.getFile() != 0){
+
+			return new Position(pos.getRank() - 1, pos.getFile() - 1);
+
+		}
+
+		return pos;
+	}
+
+	/**
 	 * A string representation of a position.
 	 * @return A string in the format of "(file, rank)".
 	 */
