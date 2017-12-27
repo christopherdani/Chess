@@ -65,6 +65,11 @@ public class Display {
 							System.out.print("B");
 							exists = true;
 						}
+
+						else if (Queen.class.isInstance(unit)){
+							System.out.print("Q");
+							exists = true;
+						}
 					}
 				}
 				//Print out blank if no unit exists at that position.

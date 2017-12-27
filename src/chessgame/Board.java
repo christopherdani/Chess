@@ -32,6 +32,11 @@ public class Board {
 	 */
 	public static List<Bishop> bishops;
 
+	/**
+	 * The list of Queens on the board.
+	 */
+	public static List<Queen> queens;
+
 	private static Board board;
 	private Position[][] game;
 
@@ -45,16 +50,17 @@ public class Board {
 		Board.rooks = new ArrayList<Rook>();
 		Board.units = new ArrayList<Unit>();
 		Board.bishops = new ArrayList<Bishop>();
+		Board.queens = new ArrayList<Queen>();
 		if (start){
 			//Fill the board with units in its initial positions
 
 			//Create black king
-			King king1 = new King(new Position(7,3),1);
+			King king1 = new King(new Position(7,4),1);
 			kings.add(king1);
 			units.add(king1);
 
 			//Create white king
-			King king2 = new King(new Position(0,3),0);
+			King king2 = new King(new Position(0,4),0);
 			kings.add(king2);
 			units.add(king2);
 
@@ -74,6 +80,32 @@ public class Board {
 			Rook rook4 = new Rook(new Position(7,7), 0);
 			rooks.add(rook4);
 			units.add(rook4);
+
+			//Create black bishops
+			Bishop bis1 = new Bishop(new Position(0, 2),1);
+			Bishop bis2 = new Bishop(new Position(0, 5),1);
+			bishops.add(bis1);
+			bishops.add(bis2);
+			units.add(bis1);
+			units.add(bis2);
+
+			//Create white bishops
+			Bishop bis3 = new Bishop(new Position(7, 2),0);
+			Bishop bis4 = new Bishop(new Position(7, 5),0);
+			bishops.add(bis3);
+			bishops.add(bis4);
+			units.add(bis3);
+			units.add(bis4);
+
+			//Create white queen
+			Queen q1 = new Queen(new Position(7,3), 0);
+			queens.add(q1);
+			units.add(q1);
+
+			//Create black queen
+			Queen q2 = new Queen(new Position(0, 3), 1);
+			queens.add(q2);
+			units.add(q2);
 
 			//Create Bishop for testing
 			Bishop bis = new Bishop(new Position(4,3), 0);
