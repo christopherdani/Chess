@@ -12,14 +12,14 @@ public class Display {
 	 *
 	 * <pre>
 	 *     a  b  c  d  e  f  g  h
-	 *  8 |R||N||B||K||Q||B||N||R| 8
+	 *  8 |R||N||B||Q||K||B||N||R| 8
 	 *  7 |P||P||P||P||P||P||P||P| 7
 	 *  6 | || || || || || || || | 6
 	 *  5 | || || || || || || || | 5
 	 *  4 | || || || || || || || | 4
 	 *  3 | || || || || || || || | 3
 	 *  2 |P||P||P||P||P||P||P||P| 2
-	 *  1 |R||N||B||K||Q||B||N||R| 1
+	 *  1 |R||N||B||Q||K||B||N||R| 1
 	 *     a  b  c  d  e  f  g  h
 	 * </pre>
 	 *
@@ -70,6 +70,11 @@ public class Display {
 							System.out.print("Q");
 							exists = true;
 						}
+
+						else if (Knight.class.isInstance(unit)){
+							System.out.print("N");
+							exists = true;
+						}
 					}
 				}
 				//Print out blank if no unit exists at that position.
@@ -90,9 +95,10 @@ public class Display {
 		Board board = Board.getBoardInstance(true);
 		display(board);
 
-		Position init = new Position(4,3);
-		Position des = new Position(5,4);
-		Board.kill(init, des);
+//		Position init = new Position(3,3);
+//		Position des = new Position(5,4);
+//		Board.move(init, des);
+//		display(board);
 
 
 //		Position init = new Position(1,0);

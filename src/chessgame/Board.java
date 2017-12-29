@@ -37,6 +37,11 @@ public class Board {
 	 */
 	public static List<Queen> queens;
 
+	/**
+	 * The list of Knights on the board.
+	 */
+	public static List<Knight> knights;
+
 	private static Board board;
 	private Position[][] game;
 
@@ -51,6 +56,7 @@ public class Board {
 		Board.units = new ArrayList<Unit>();
 		Board.bishops = new ArrayList<Bishop>();
 		Board.queens = new ArrayList<Queen>();
+		Board.knights = new ArrayList<Knight>();
 		if (start){
 			//Fill the board with units in its initial positions
 
@@ -107,13 +113,32 @@ public class Board {
 			queens.add(q2);
 			units.add(q2);
 
+			//Create black knights
+			Knight k1 = new Knight(new Position(0,1), 1);
+			Knight k2 = new Knight(new Position(0, 6), 1);
+			knights.add(k1);
+			knights.add(k2);
+			units.add(k1);
+			units.add(k2);
+
+			//Create white knights
+			Knight k3 = new Knight(new Position(7, 1), 0);
+			Knight k4 = new Knight(new Position(7, 6), 0);
+			knights.add(k3);
+			knights.add(k4);
+			units.add(k3);
+			units.add(k4);
+
 			//Create Bishop for testing
-			Bishop bis = new Bishop(new Position(4,3), 0);
-			bishops.add(bis);
-			units.add(bis);
+//			Bishop bis = new Bishop(new Position(4,3), 0);
+//			bishops.add(bis);
+//			units.add(bis);
 //			King test = new King(new Position(4,3),0);
 //			kings.add(test);
 //			units.add(test);
+//			Knight k = new Knight (new Position(3,3), 0);
+//			knights.add(k);
+//			units.add(k);
 
 
 
