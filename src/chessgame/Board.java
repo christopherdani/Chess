@@ -9,6 +9,11 @@ import java.util.List;
 public class Board {
 
 	/**
+	 * List of moves
+	 */
+	public static ArrayList<Command> history;
+
+	/**
 	 * The list of all units on the board.
 	 */
 	public static List<Unit> units;
@@ -57,6 +62,7 @@ public class Board {
 		Board.bishops = new ArrayList<Bishop>();
 		Board.queens = new ArrayList<Queen>();
 		Board.knights = new ArrayList<Knight>();
+		Board.history = new ArrayList<Command>();
 		if (start){
 			//Fill the board with units in its initial positions
 
@@ -129,20 +135,6 @@ public class Board {
 			units.add(k3);
 			units.add(k4);
 
-			//Create Bishop for testing
-//			Bishop bis = new Bishop(new Position(4,3), 0);
-//			bishops.add(bis);
-//			units.add(bis);
-//			King test = new King(new Position(4,3),0);
-//			kings.add(test);
-//			units.add(test);
-//			Knight k = new Knight (new Position(3,3), 0);
-//			knights.add(k);
-//			units.add(k);
-
-
-
-
 			for (int i = 0; i < 8; i++){
 				for (int j = 0; j < 8; j++){
 					//Create black pawns
@@ -162,11 +154,23 @@ public class Board {
 				}
 			}
 		}
+
+		//Testing
+//		Bishop bis = new Bishop(new Position(4,3), 0);
+//		bishops.add(bis);
+//		units.add(bis);
+//		King test = new King(new Position(4,3),0);
+//		kings.add(test);
+//		units.add(test);
+//		Knight k = new Knight (new Position(3,3), 0);
+//		knights.add(k);
+//		units.add(k);
+
 	}
 
 	/**
 	 * Get the board instance. Create one if it does not exist.
-	 * @param game
+	 * @param game The status of the game, start a new game if true.
 	 * @return An instance of the board.
 	 */
 	public static Board getBoardInstance(boolean game){
@@ -233,19 +237,15 @@ public class Board {
 	public static void move(Position init, Position des){
 		//Check if a unit occupies the initial position.
 		for (Unit unit : Board.units){
-
 			if (unit.getPos().equals(init)){
 				//Check if the unit can move to des
-
 				for (Position pos : unit.canMove()){
 					if (pos.equals(des)){
 						unit.setPos(des);
 					}
 				}
-
 			}
 		}
-
 	}
 
 	/**
@@ -275,4 +275,32 @@ public class Board {
 			}
 		}
 	}
+
+	/**
+	 * Return 0 if white is checked, 1 if black is checked, -1 if no check.
+	 * @param board
+	 * @return 0 if white is checked, 1 if black is checked, -1 if no check.
+	 */
+	public static int check(Board board){
+		return -1;
+	}
+
+	/**
+	 * Return 0 if white is checkmated, 1 if black is checkmated, -1 otherwise.
+	 * @param board
+	 * @return
+	 */
+	public static int checkMate(Board board){
+		return -1;
+	}
+
+	/**
+	 * Return 0 if white wins, 1 if black wins, -1 otherwise.
+	 * @param board
+	 * @return 0 if white wins, 1 if black wins, -1 otherwise.
+	 */
+	public static int wins(Board board){
+		return -1;
+	}
+
 }

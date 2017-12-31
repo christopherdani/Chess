@@ -1,5 +1,7 @@
 package chessgame;
 
+import java.util.Scanner;
+
 /**
  * A class to display the chess board.
  */
@@ -91,9 +93,41 @@ public class Display {
 
 	}
 
+	/**
+	 * Update the board and display the newest moves. Notify if there is a check or checkmate.
+	 * If the last move performed ended the game, display winner.
+	 * @param board
+	 */
+	public static void update(Board board){
+		display(board);
+	}
+
+	/**
+	 * Parse the user input and translate it into commands if valid.
+	 * For now, input string should be in the form of filerank1 filerank2: e.g. f2 f3.
+	 * Where filerank1 is the position from and filerank2 is the position to.
+	 * @param input
+	 */
+	public static void parse(String input){
+
+
+		//Board.history.add(new Command(new Position(), new Position()));
+
+	}
+
 	public static void main(String[] str){
 		Board board = Board.getBoardInstance(true);
-		display(board);
+
+		Scanner input = new Scanner(System.in);
+		String command;
+
+		while (input.equals("quit")){
+			command = input.nextLine();
+			update(board);
+		}
+
+
+		//System.out.println(Board.checkMate(board));
 
 //		Position init = new Position(3,3);
 //		Position des = new Position(5,4);
