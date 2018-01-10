@@ -10,3 +10,4 @@
 2. Single Choice Principle violations.
 3. Algorithm could be optimised.
 4. Proper testing has yet to be done.
+5. Overall design needs to be improved (as I started it with no plan in mind).

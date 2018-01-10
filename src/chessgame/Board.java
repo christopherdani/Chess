@@ -212,6 +212,20 @@ public class Board {
 	}
 
 	/**
+	 * Returns the color of the occupying unit
+	 * @param pos
+	 * @return the color of the unit occupying pos. -1 if no unit exists.
+	 */
+	public static int isOccupiedBy(Position pos){
+		for (Unit unit : units){
+			if (unit.getPos().equals((pos))){
+				return unit.getColor();
+			}
+		}
+		return -1;
+	}
+
+	/**
 	 * Checks if the des is occupied by an ally.
 	 * @param init The unit that is to be checked against.
 	 * @param des The destination position that is to be checked.
@@ -250,8 +264,8 @@ public class Board {
 
 	/**
 	 * Moves the unit occupying init and kills the unit occupying des if possible.
-	 * @param init The unit that is the "killer"
-	 * @param des The unit that is the "victim"
+	 * @param init The position that is occupied by the unit that is the "killer"
+	 * @param des The position that is occupied by the unit that is the "victim"
 	 */
 	public static void kill(Position init, Position des){
 		for (Unit unit : Board.units){
@@ -273,6 +287,29 @@ public class Board {
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * Execute command
+	 * @param command
+	 */
+	public static void execute(Command command){
+		Position init = command.getFrom();
+		Position des = command.getTo();
+
+		if (isOccupiedBy(init) != -1 && isOccupiedBy(des) == -1){
+			System.out.println("Moving from " + command.represent.substring(0, 2) + " to " + command.represent.substring(0, 2));
+			move(init, des);
+		}
+		else if (isOccupiedBy(init) != isOccupiedBy(des) && (isOccupiedBy(init) != -1 && isOccupiedBy(des) != -1)){
+			if (isOccupiedBy(init) == 0){
+				System.out.println("White unit at " + command.represent.substring(0, 2) + " killing black unit at " + command.represent.substring(0, 2));
+			}
+			else {
+				System.out.println("Black unit at " + command.represent.substring(0, 2) + " killing white unit at " + command.represent.substring(0, 2));
+			}
+			kill(init, des);
 		}
 	}
 
