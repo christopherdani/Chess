@@ -98,14 +98,20 @@ public class Game {
 	 * If the last move performed ended the game, display winner.
 	 * @param board
 	 */
-	public static void update(Board board, String command){
+	public static boolean update(Board board, String command, int turn){
+		if (command.matches("quit")){
+			System.out.println("Quitting now!");
+			return false;
+		}
+
 		//Check the new command in the history array
 		try {
 			Command newest = parse(command);
-			Board.execute(newest);
+			return Board.execute(newest, turn);
 		} catch (IllegalArgumentException e){
-			display(board);
+			System.out.println(e.getMessage());
 		}
+		return false;
 
 	}
 
@@ -254,46 +260,20 @@ public class Game {
 	}
 
 	public static void main(String[] str){
+		int turn = 1; // Start at white turn (odd). While black turn is even.
+		boolean success = false; // Only increment turn if this is true.
 		Board board = Board.getBoardInstance(true);
-
 		Scanner input = new Scanner(System.in);
 		String command = "";
-		display(board);
+
 		// Game loop
 		while (!command.equals("quit")){
+			display(board);
 			command = input.nextLine();
-			update(board, command);
+			success = update(board, command, turn);
+			if (success){
+				turn++;
+			}
 		}
-		System.out.println(Board.history);
-
-
-		//System.out.println(Board.checkMate(board));
-
-//		Position init = new Position(3,3);
-//		Position des = new Position(5,4);
-//		Board.move(init, des);
-//		display(board);
-
-
-//		Position init = new Position(1,0);
-//		Position des = new Position(3,0);
-//		Board.move(init, des);
-//		display(board);
-//
-//		Position init5 = new Position(6,1);
-//		Position des5 = new Position(4,1);
-//		Board.move(init5,des5);
-//		display(board);
-//
-//
-//		Board.kill(des, des5);
-//		display(board);
-//
-//
-//		Position rookCheck1 = new Position(7,0);
-//		Position rookCheck2 = new Position(7,2);
-//		Board.move(rookCheck1, rookCheck2);
-//		display(board);
-
 	}
 }

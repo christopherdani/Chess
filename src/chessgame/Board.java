@@ -154,18 +154,6 @@ public class Board {
 				}
 			}
 		}
-
-		//Testing
-//		Bishop bis = new Bishop(new Position(4,3), 0);
-//		bishops.add(bis);
-//		units.add(bis);
-//		King test = new King(new Position(4,3),0);
-//		kings.add(test);
-//		units.add(test);
-//		Knight k = new Knight (new Position(3,3), 0);
-//		knights.add(k);
-//		units.add(k);
-
 	}
 
 	/**
@@ -217,6 +205,9 @@ public class Board {
 	 * @return the color of the unit occupying pos. -1 if no unit exists.
 	 */
 	public static int isOccupiedBy(Position pos){
+		/*
+		This is probably one of the most inefficient ways of doing this. It works for now, but this should really be fixed!
+		 */
 		for (Unit unit : units){
 			if (unit.getPos().equals((pos))){
 				return unit.getColor();
@@ -291,26 +282,50 @@ public class Board {
 	}
 
 	/**
-	 * Execute command
-	 * @param command
+	 * Execute command if it is legal to do so.
+	 * @param command The command
+	 * @param turn Odd if white, even if black.
 	 */
-	public static void execute(Command command){
+	public static boolean execute(Command command, int turn){
 		Position init = command.getFrom();
 		Position des = command.getTo();
+		int unitColorInit = isOccupiedBy(init);
+		int unitColorDes = isOccupiedBy(des);
 
-		if (isOccupiedBy(init) != -1 && isOccupiedBy(des) == -1){
-			System.out.println("Moving from " + command.represent.substring(0, 2) + " to " + command.represent.substring(0, 2));
-			move(init, des);
-		}
-		else if (isOccupiedBy(init) != isOccupiedBy(des) && (isOccupiedBy(init) != -1 && isOccupiedBy(des) != -1)){
-			if (isOccupiedBy(init) == 0){
-				System.out.println("White unit at " + command.represent.substring(0, 2) + " killing black unit at " + command.represent.substring(0, 2));
+		if (unitColorInit != -1 && unitColorDes == -1){
+
+			if (unitColorInit == 0 && turn % 2 != 0){
+				System.out.println("Moving from " + command.represent.substring(0, 2) + " to " + command.represent.substring(3, 5));
+				move(init, des);
+				return true;
+			}
+			else if (unitColorInit == 1 && turn % 2 == 0){
+				System.out.println("Moving from " + command.represent.substring(0, 2) + " to " + command.represent.substring(3, 5));
+				move(init, des);
+				return true;
 			}
 			else {
-				System.out.println("Black unit at " + command.represent.substring(0, 2) + " killing white unit at " + command.represent.substring(0, 2));
+				System.out.println("It is not your turn!");
+				return false;
 			}
-			kill(init, des);
 		}
+		else if (unitColorInit != unitColorDes && (unitColorInit != -1 && unitColorDes != -1)){
+			if (unitColorInit == 0 && turn % 2 != 0){
+				System.out.println("White unit at " + command.represent.substring(0, 2) + " killing black unit at " + command.represent.substring(3, 5));
+				kill(init, des);
+				return true;
+			}
+			else if (unitColorInit == 1 && turn % 2 == 0){
+				System.out.println("Black unit at " + command.represent.substring(0, 2) + " killing white unit at " + command.represent.substring(3, 5));
+				kill(init, des);
+				return true;
+			}
+			else {
+				System.out.println("It is not your turn!");
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**
