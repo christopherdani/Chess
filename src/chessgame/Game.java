@@ -1,5 +1,10 @@
 package chessgame;
 
+import Test.Testing;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -101,6 +106,16 @@ public class Game {
 	public static boolean update(Board board, String command, int turn){
 		if (command.matches("quit")){
 			System.out.println("Quitting now!");
+			return false;
+		}
+		if (command.matches("turn")){
+			System.out.println("Total turns: " + turn);
+			if (turn % 2 == 1){
+				System.out.println("It is now white's turn!");
+			}
+			else {
+				System.out.println("It is now black's turn!");
+			}
 			return false;
 		}
 
@@ -261,18 +276,47 @@ public class Game {
 
 	public static void main(String[] str){
 		int turn = 1; // Start at white turn (odd). While black turn is even.
-		boolean success = false; // Only increment turn if this is true.
+		boolean success; // Only increment turn if this is true.
 		Board board = Board.getBoardInstance(true);
 		Scanner input = new Scanner(System.in);
 		String command = "";
+		System.out.println("Enter \"play\" to play a new game and \"test\" to enter testing mode!");
+		command = input.nextLine();
 
-		// Game loop
-		while (!command.equals("quit")){
+		if (command.equals("test")){
+			System.out.println();
+			System.out.println();
+			System.out.println("Testing mode");
+			System.out.println();
+			System.out.println("Enter what test you want to perform or enter \"all\" to test everything");
+			System.out.println(
+					"\"check\" to test for basic check testing\n" +
+					"More to be added here..." +
+					"");
+			System.out.println();
+			ArrayList<String> testMoves = Testing.checkTest();
+			Iterator itr = testMoves.iterator();
+			System.out.println("Move set is as follow: \n" + testMoves);
+			while (itr.hasNext()){
+				display(board);
+				success = update(board, itr.next().toString(), turn);
+				System.out.println();
+				if (success){
+					turn++;
+				}
+			}
 			display(board);
-			command = input.nextLine();
-			success = update(board, command, turn);
-			if (success){
-				turn++;
+		}
+
+		if (command.equals("play")) {
+			// Game loop
+			while (!command.equals("quit")) {
+				display(board);
+				command = input.nextLine();
+				success = update(board, command, turn);
+				if (success) {
+					turn++;
+				}
 			}
 		}
 	}

@@ -7,7 +7,6 @@ import java.util.List;
  * A singleton class containing an instance of the board that the game will be played on.
  */
 public class Board {
-
 	/**
 	 * List of moves
 	 */
@@ -21,31 +20,31 @@ public class Board {
 	/**
 	 * The list of pawns on the board.
 	 */
-	public static List<Pawn> pawns;
+	private static List<Pawn> pawns;
 
 	/**
 	 * The list of kings on the board.
 	 */
-	public static List<King> kings;
+	private static List<King> kings;
 	/**
 	 * The list of rooks on the board.
 	 */
-	public static List<Rook> rooks;
+	private static List<Rook> rooks;
 
 	/**
 	 * The list of bishops on the board.
 	 */
-	public static List<Bishop> bishops;
+	private static List<Bishop> bishops;
 
 	/**
 	 * The list of Queens on the board.
 	 */
-	public static List<Queen> queens;
+	private static List<Queen> queens;
 
 	/**
 	 * The list of Knights on the board.
 	 */
-	public static List<Knight> knights;
+	private static List<Knight> knights;
 
 	private static Board board;
 	private Position[][] game;
@@ -67,12 +66,12 @@ public class Board {
 			//Fill the board with units in its initial positions
 
 			//Create black king
-			King king1 = new King(new Position(7,4),1);
+			King king1 = new King(new Position(7,4),0);
 			kings.add(king1);
 			units.add(king1);
 
 			//Create white king
-			King king2 = new King(new Position(0,4),0);
+			King king2 = new King(new Position(0,4),1);
 			kings.add(king2);
 			units.add(king2);
 
@@ -217,6 +216,23 @@ public class Board {
 	}
 
 	/**
+	 * Return unit occupying pos
+	 * @param pos
+	 * @return the color of the unit occupying pos. -1 if no unit exists.
+	 */
+	public static Unit getUnit(Position pos){
+		/*
+		This is probably one of the most inefficient ways of doing this. It works for now, but this should really be fixed!
+		 */
+		for (Unit unit : units){
+			if (unit.getPos().equals((pos))){
+				return unit;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Checks if the des is occupied by an ally.
 	 * @param init The unit that is to be checked against.
 	 * @param des The destination position that is to be checked.
@@ -289,19 +305,30 @@ public class Board {
 	public static boolean execute(Command command, int turn){
 		Position init = command.getFrom();
 		Position des = command.getTo();
+		Unit unit = getUnit(init);
+		int checked;
 		int unitColorInit = isOccupiedBy(init);
 		int unitColorDes = isOccupiedBy(des);
 
 		if (unitColorInit != -1 && unitColorDes == -1){
-
 			if (unitColorInit == 0 && turn % 2 != 0){
 				System.out.println("Moving from " + command.represent.substring(0, 2) + " to " + command.represent.substring(3, 5));
 				move(init, des);
+				//We want to check if the movement causes a check after the move is executed.
+				checked = check(unit);
+				if (checked == 1){
+					//Now we want to check if the check is actually a checkmate
+					System.out.println("Black is checked!");
+				}
 				return true;
 			}
 			else if (unitColorInit == 1 && turn % 2 == 0){
 				System.out.println("Moving from " + command.represent.substring(0, 2) + " to " + command.represent.substring(3, 5));
 				move(init, des);
+				checked = check(unit);
+				if (checked == 0){
+					System.out.println("White is checked!");
+				}
 				return true;
 			}
 			else {
@@ -313,11 +340,19 @@ public class Board {
 			if (unitColorInit == 0 && turn % 2 != 0){
 				System.out.println("White unit at " + command.represent.substring(0, 2) + " killing black unit at " + command.represent.substring(3, 5));
 				kill(init, des);
+				checked = check(unit);
+				if (checked == 1){
+					System.out.println("Black is checked!");
+				}
 				return true;
 			}
 			else if (unitColorInit == 1 && turn % 2 == 0){
 				System.out.println("Black unit at " + command.represent.substring(0, 2) + " killing white unit at " + command.represent.substring(3, 5));
 				kill(init, des);
+				checked = check(unit);
+				if (checked == 0){
+					System.out.println("White is checked!");
+				}
 				return true;
 			}
 			else {
@@ -330,10 +365,21 @@ public class Board {
 
 	/**
 	 * Return 0 if white is checked, 1 if black is checked, -1 if no check.
-	 * @param board
+	 * @param unit
 	 * @return 0 if white is checked, 1 if black is checked, -1 if no check.
 	 */
-	public static int check(Board board){
+	public static int check(Unit unit){
+		for (Position pos: unit.canKill()){
+			Unit possibleKing = getUnit(pos);
+			if (kings.contains(possibleKing)){
+				if (possibleKing.getColor() == 0){
+					return 0;
+				}
+				else {
+					return 1;
+				}
+			}
+		}
 		return -1;
 	}
 
